@@ -52,7 +52,9 @@ export class MatchParticipantService<
 
     const participantIds = participants.map((participant) => participant.id);
     const uniqueParticipantsHandles = [
-      ...new Set(participants.map((participant) => participant.handle)),
+      ...new Set(
+        participants.map((participant) => participant.handle.toLowerCase()),
+      ),
     ];
 
     const personRepository =
@@ -144,7 +146,7 @@ export class MatchParticipantService<
 
     const participantsToUpdate = await participantRepository.find({
       where: {
-        handle: Equal(handle),
+        handle: Equal(handle.toLowerCase()),
       },
     });
 
