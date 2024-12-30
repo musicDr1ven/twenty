@@ -29,6 +29,10 @@
       "path": "../packages/twenty-server"
     },
     {
+      "name": "packages/twenty-exchange-manager",
+      "path": "../packages/twenty-exchange-manager"
+    },
+    {
       "name": "packages/twenty-utils",
       "path": "../packages/twenty-utils"
     },

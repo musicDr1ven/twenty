@@ -1,5 +1,36 @@
 # Base image for common dependencies
-FROM node:18.17.1-alpine as common-deps
+FROM debian:buster as common-deps
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+SHELL ["/bin/bash", "-l", "-euxo", "pipefail", "-c"]
+
+RUN apt-get update; \
+    apt-get full-upgrade -y; \
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+    ; \
+    apt-get clean; \
+    rm -rf /var/lib/apt/lists/*
+
+ENV NVM_DIR /usr/local/nvm
+
+RUN mkdir -p "$NVM_DIR"; \
+    curl -o- \
+        "https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh" | \
+        bash \
+    ; \
+    source $NVM_DIR/nvm.sh; \
+    nvm install 18.20.5 && nvm use 18.20.5
+
+RUN command -v nvm; \
+    command -v node; \
+    node --version; \
+    command -v npm; \
+    npm --version
+
+ RUN npm install yarn -g
 
 WORKDIR /app
 
@@ -15,7 +46,9 @@ COPY ./packages/twenty-shared/package.json /app/packages/twenty-shared/
 COPY ./packages/twenty-front/package.json /app/packages/twenty-front/
 
 # Install all dependencies
-RUN yarn && yarn cache clean && npx nx reset
+
+RUN yarn && yarn cache clean
+# && npx nx reset
 
 
 # Build the back
@@ -48,10 +81,10 @@ RUN npx nx build twenty-front
 
 
 # Final stage: Run the application
-FROM node:18.17.1-alpine as twenty
+FROM common-deps as twenty
 
 # Used to run healthcheck in docker
-RUN apk add --no-cache curl jq
+#RUN apk add --no-cache curl jq
 
 RUN npm install -g tsx
 

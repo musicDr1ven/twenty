@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react-swc';
 import wyw from '@wyw-in-js/vite';
 import * as path from 'path';
 import { defineConfig } from 'vite';
-import checker from 'vite-plugin-checker';
 import dts, { PluginOptions } from 'vite-plugin-dts';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -40,7 +39,6 @@ export default defineConfig(({ command }) => {
       tsconfigPaths(),
       svgr(),
       dts(dtsConfig),
-      checker(checkersConfig),
       wyw({
         include: [
           '**/OverflowingTextWithTooltip.tsx',

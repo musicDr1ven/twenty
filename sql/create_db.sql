@@ -1,0 +1,2 @@
+CREATE DATABASE "default" WITH OWNER postgres;
+CREATE DATABASE "test" WITH OWNER postgres;

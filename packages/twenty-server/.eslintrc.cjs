@@ -25,8 +25,8 @@ module.exports = {
             ],
           },
         ],
-
-        '@stylistic/linebreak-style': ['error', 'unix'],
+        'linebreak-style': 0,
+        '@stylistic/linebreak-style': [0, 'error', 'windows'],
         '@stylistic/lines-between-class-members': [
           'error',
           {

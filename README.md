@@ -1,5 +1,13 @@
 
 <br>
+Start the server, the worker and the frontend services:
+
+npx nx start-win twenty-server
+npx nx worker twenty-server
+npx nx start twenty-front --host
+Alternatively, you can start all services at once:
+
+npx nx start
 <p align="center">
   <a href="https://www.twenty.com">
     <img src="./packages/twenty-website/public/images/core/logo.svg" width="100px" alt="Twenty logo" />

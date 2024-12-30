@@ -46,7 +46,6 @@ export class EnvironmentVariables {
   @IsBoolean()
   DEBUG_MODE = false;
 
-  @IsEnum(NodeEnvironment)
   @IsString()
   NODE_ENV: NodeEnvironment = NodeEnvironment.development;
 
